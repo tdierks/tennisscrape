@@ -1,0 +1,1066 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<title>ViewState: All You Wanted to Know: ASP Alliance</title><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" /><meta name="MS.LOCALE" CONTENT="en-US" /><meta name="Description" content="This article looks at what ViewState is NOT and what it is, as well as exploring the internal format of ViewState and how you can parse it yourself." /><meta name="author" content="Paul Wilson" /><meta name="Search.PublishDate" content="17 Oct 2003 03:55:31 -04:00" /><meta name="Search.RevisedDate" content="" /><meta name="keywords" content="ViewState: All You Wanted to Know" /><meta name="Search.TopicType" content="kbArticle" /><link href="/css/aspalliance.css" type="text/css" rel="stylesheet" /><link rel="alternate" type="application/rss+xml" title="XML" href="http://aspalliance.com/rss.aspx" />
+<script src="http://aspalliance.com/js/common.js" type="text/javascript"></script></head><body>
+<div id="header">
+	<div id="logoleft" onclick="location.href='http://aspalliance.com/'"></div>
+	    <div id="_ctl6_banner" style="float:right">
+	    <script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=8;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span id="_ctl6_Leaderboard1"></span>
+
+		</div>
+	</div>
+</div><div id="mainContent"><table class="mainTable" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td colspan="2"><table border="0" cellpadding="0" cellspacing="0" id="breadCrumbTable" class="breadCrumbTable"><tr><td class="breadCrumbCell" id="breadCrumbCell"><a id="homelink" href="/">ASP.NET Tutorials</a> &raquo; ViewState: All You Wanted to Know</td><td class="breadCrumbLoginCell">&nbsp;&nbsp;Not Logged In. <a href="/login.aspx">Login</a></td></tr></table></td></tr><tr><td class="leftColumn"><img src="http://aspalliance.com/images/clear.gif" alt="" height="3" width="1" border="0" /><!-- SiteSearch Google -->
+<form method="get" action="http://www.google.com/custom" target="_top" style="margin: 0; padding: 0">
+<table border="0" cellpadding="3" cellspacing="0" class="MenuBox">
+<tr><td nowrap="nowrap" valign="top" align="left" height="32">
+<a href="http://www.google.com/">
+<img src="http://www.google.com/logos/Logo_25wht.gif"
+border="0" alt="Google"></img></a>
+<br/>
+
+<input type="hidden" name="domains" value="aspalliance.com"></input>
+<input type="text" name="q" size="25" maxlength="255" value="" style="font-size:.9em"></input>
+</td></tr>
+<tr>
+<td>
+<table>
+<tr>
+<td>
+<input type="radio" name="sitesearch" value="aspalliance.com" checked="checked"></input>
+AspAlliance.com
+</td>
+<td>
+<input type="radio" name="sitesearch" value=""></input>
+Web
+</td>
+</tr>
+</table>
+
+<input type="submit" name="sa" value="Search"></input>
+<input type="hidden" name="client" value="pub-4053580011448835"></input>
+<input type="hidden" name="forid" value="1"></input>
+<input type="hidden" name="channel" value="9561143596"></input>
+<input type="hidden" name="ie" value="windows-1252"></input>
+<input type="hidden" name="oe" value="windows-1252"></input>
+<input type="hidden" name="safe" value="active"></input>
+<input type="hidden" name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:CC0000;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;LH:80;LW:173;L:http://aspalliance.com/images/aspalliance_logo_byline_white_173x80.gif;S:http://aspalliance.com/;LP:1;FORID:1;"></input>
+<input type="hidden" name="hl" value="en"></input>
+
+</td></tr></table>
+</form>
+<!-- SiteSearch Google --><span></span><?xml version="1.0" encoding="utf-8"?><table cellpadding="3" cellspacing="0" class="MenuBox"><tr><td valign="top" width="137"><b>AspAlliance</b><br /><a href="/Register.aspx" title="Register to customize your experience.">Register</a><br /><a href="/Profile.aspx" title="Edit your profile.">Edit My Profile</a><br /><a href="/AuthorListing.aspx" title="Our contributing authors.">Author List</a><br /><a href="/writeForUs.aspx" title="Want to write for us?  Just follow our relatively painless submission guidelines.">Write for Us</a><br /><a href="/About.aspx" title="A little information about the AspAlliance.">About AspAlliance</a><br /><a href="/Feedback.aspx" title="Have a suggestion?  Found an error?  Let us know!.">Contact Us</a><br /><a href="/Privacy.aspx" title="We keep your private information private.  Here's the full lawyer version.">Privacy Policy</a><br /><a href="/Link.aspx" title="Support the Asp.Net Community by adding a link to AspAlliance.com">Link To Us</a><br /><a href="http://lakequincy.com/advertisers/publisherinfo/aspalliance.aspx" title="Learn about promotional our opportunities.">Advertise</a><br /><br /><b>Subscribe</b><br /><a href="/subscribe.aspx" title="Free weekly newsletter with news, contests, editorials, events, and new articles">Free Newsletter</a><br /><a href="/newsletter/" title="Archive of past newsletters">Newsletter Archive</a><br /><a href="/rss.aspx" title="Subscribe to our articles using your favorite news aggregator.">RSS Syndication <img src="/images/rss_button.gif" height="14" width="36" alt="" border="0" /></a><br /><br /><b>.NET Tutorials</b><br /><a href="/articles/LearnDotNet.aspx" title=".NET articles, tutorials, examples">Learn .NET</a><br /><a href="/articles/LearnWCF.aspx" title="Windows Communication Framework articles, tutorials, examples">Learn WCF</a><br /><a href="/articles/LearnWPF.aspx" title="Windows Presentation Framework articles, tutorials, examples">Learn WPF</a><br /><a href="/articles/LearnASPNET.aspx" title="ASP.NET articles, tutorials, examples">Learn ASP.NET</a><br /><a href="/articles/LearnAJAX.aspx" title="AJAX and Atlas articles, tutorials, examples">Learn AJAX</a><br /><a href="/articles/LearnSilverlight.aspx" title="AJAX and Atlas articles, tutorials, examples">Learn Silverlight</a><br /><a href="/articles/LearnVisualStudio.aspx" title="Visual Studio articles, tutorials, examples">Learn Visual Studio</a><br /><a href="/articles/LearnADONET.aspx" title="ADO.NET articles, tutorials, examples">Learn ADO.NET</a><br /><a href="/articles/LearnLINQ.aspx" title="LINQ articles, tutorials, examples">Learn LINQ</a><br /><a href="/articles/LearnCSharp.aspx" title="C# (CSharp) articles, tutorials, examples">Learn C# (CSharp)</a><br /><a href="/articles/LearnVBNET.aspx" title="VB.NET (Visual Basic .NET) articles, tutorials, examples">Learn VB.NET</a><br /><a href="/articles/LearnWebServices.aspx" title="Web Services articles, tutorials, examples">Learn Web Services</a><br /><a href="/articles/LearnControls.aspx" title="ASP.NET Control articles, tutorials, examples">Learn Controls</a><br /><a href="/articles/LearnBizTalk.aspx" title="BizTalk articles, tutorials, examples">Learn BizTalk</a><br /><a href="/articles/LearnSharePoint.aspx" title="SharePoint articles, tutorials, examples">Learn SharePoint</a><br /><a href="/articles/LearnMobile.aspx" title="Mobile (SmartPhone, Compact Framework, Mobile Internet Toolkit) articles, tutorials, examples">Learn Mobile</a><br /><a href="/articles/LearnSQL.aspx" title="SQL (and SQL Server) articles, tutorials, examples">Learn SQL</a><br /><a href="/sql-reporting/" title="SQL Server Reporting Services (SSRS) articles, tutorials, examples, forums and more">Learn SQL Reporting</a><br /><a href="/articles/LearnWinForms.aspx" title="Windows Forms articles, tutorials, examples">Learn Windows Forms</a><br /><a href="/articles/LearnXML.aspx" title="XML, XSL, XSLT articles, tutorials, examples">Learn XML</a><br /><a href="/articles/LearnCrystalReports.aspx" title="Crystal Reports articles, tutorials, examples, forums, blogs">Learn Crystal Reports</a><br /><a href="/telerik/" title="Learn about telerik with videos, white papers, reviews, and tutorials">Learn telerik</a><br /><a href="/farpoint/" title="Learn FarPoint Spread for Web Forms with videos, white papers, reviews, and tutorials">Learn FarPoint</a><br /><a href="/devexpress/" title="Learn about DevExpress's suite of user interface tools and IDE enhancements">Learn DevExpress</a><br /><a href="http://authors.aspalliance.com/quickstart/" title="ASP.NET Quickstart Examples">Examples</a><br /><a href="http://asp.net/quickstart/" title="ASP.NET 2.0 Quickstart Examples">ASP.NET 2.0 Examples</a><br /><br /><b>ASP Tutorials</b><br /><a href="/articles/LearnASP.aspx" title="Active Server Pages articles, tutorials, examples">Learn ASP</a><br /><a href="/articles/LearnVBScript.aspx" title="VBScript articles, tutorials, examples">Learn VBScript</a><br /><a href="/articles/LearnJScript.aspx" title="JScript (JavaScript) articles, tutorials, examples">Learn JScript</a><br /><a href="/articles/LearnSQL.aspx" title="SQL (and SQL Server) articles, tutorials, examples">Learn SQL</a><br /><a href="/articles/LearnXML.aspx" title="XML, XSL, XSLT articles, tutorials, examples">Learn XML</a><br /><br /><b>Other Tutorials</b><br /><a href="/articles/LearnJava.aspx" title="Java articles, tutorials, examples">Learn Java</a><br /><a href="/articles/LearnOracle.aspx" title="Oracle articles, tutorials, examples">Learn Oracle</a><br /><a href="/articles/Opinion.aspx" title="Opinion articles, tutorials, examples">Opinion / Editorial</a><br /><a href="/crystal" title="Crystal Reports resources.">Crystal Reports Alliance</a><br /><br /><b>Free Tools</b><br /><a href="/cachemanager/default.aspx" title="Free Cache Manager Add-In.">Cache Manager</a><br /><a href="/simplecms/default.aspx" title="Free SimpleCMS Add-In.">SimpleCMS</a><br /><br /><b>Reviews</b><br /><a href="/reviews/BookReviews.aspx" title="Reviews of various developer oriented books.">Book Reviews</a><br /><a href="/reviews/ProductReviews.aspx" title="Reviews of various software components and products.">Product Reviews</a><br /><a href="/advice/ExpertAdvice.aspx" title="Expert advice articles, tutorials, and examples">Expert Advice</a><br /><br /><b>Books</b><br /><a href="/cookbook/default.aspx" title="Over 200 common ASP.NET problems described and solved by AspAlliance.com authors.">ASP.NET Developer's Cookbook</a><br /><a href="/chapters/" title="Free sample chapters!">Sample Chapters</a><br /><a href="/reviews/BookReviews.aspx" title="Reviews of various developer oriented books.">Book Reviews</a><br /><br /><b>Community</b><br /><a href="/jobs/" title="Developer Jobs on ASPAlliance.com">Developer Jobs</a><br /><a href="http://index.aspalliance.com" title="Find .NET Resources">Resource Directory</a><br /><a href="http://aspadvice.com/lists/category.aspx?c=18" title="AspAdvice.com hosts mailing lists that provide Answers to your ASP Questions.">ASP Email Lists</a><br /><a href="http://aspadvice.com/lists/category.aspx?c=17" title="AspAdvice.com hosts mailing lists that provide Answers to your ASP.NET Questions.">ASP.NET Email Lists</a><br /><a href="http://aspadvice.com/lists/category.aspx?c=30" title="AspAdvice.com hosts mailing lists that provide Answers to your Whidbey Questions.">Whidbey Email Lists</a><br /><a href="http://aspalliance.com/groups/" title="AspAlliance Groups allow quick and easy answers to questions via Usenet.">AspAlliance Groups</a><br /><a href="http://sqladvice.com/" title="SqlAdvice.com hosts mailing lists that provide Answers to your SQL Questions.">SQL Email Lists</a><br /><a href="http://xmladvice.com/" title="XmlAdvice.com hosts mailing lists that provide Answers to your XML Questions.">XML Email Lists</a><br /><a href="http://regexlib.com/" title="Need help with regular expressions?  Consult the Regular Expression Library first.">Regular Expressions</a><br /><a href="http://www.microsoft.com/communities/default.mspx" title="Microsoft Communities">MS Communities</a><br /><a href="http://www.gotdotnet.com/content/codewise/communities.aspx" title="Microsoft CodeWise Communities">CodeWise Communities</a><br /><br /><b>Web Hosting</b><br /><a href="http://index.aspalliance.com/HostingGallery/ASPWebHosting/default.aspx" title="ASP Web Hosting">ASP Hosting</a><br /><a href="http://index.aspalliance.com/HostingGallery/DedicatedServers/default.aspx" title="Dedicated Services">Dedicated Servers</a><br /><a href="http://index.aspalliance.com/HostingGallery/FreeHosting/default.aspx" title="FREE Web Hosting">FREE Hosting</a><br /><a href="http://index.aspalliance.com/HostingGallery/SharedHosting/default.aspx" title="Shared Web Hosting">Shared Hosting</a><br /><a href="http://index.aspalliance.com/HostingGallery/WebFarm/default.aspx" title="Web Farm Hosting">Web Farm Hosting</a><br /><br /></td></tr></table>
+
+<img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=16;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span></span><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /></td><td class="contentColumn"><table class="contentTable"><tr><td class="contentColumn"><!-- ContentStart --><form name="_ctl1" method="post" action="/articleViewer.aspx?aId=135&amp;pId=" language="javascript" onsubmit="javascript:return WebForm_OnSubmit();" id="_ctl1">
+<input type="hidden" name="articleComments_InvisibleCaptcha1_answer" id="articleComments_InvisibleCaptcha1_answer" value="" />
+<input type="hidden" name="articleComments_InvisibleCaptcha1_encrypted" id="articleComments_InvisibleCaptcha1_encrypted" value="keA7g0mrPjP2ls64y4/YOuH4nZPmuwYdCbqHfo/jsFo=" />
+<input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+<input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTIwODAyMTI4OQ8WBh4JYXJ0aWNsZUlkAocBHgl2ZXJzaW9uSWQCAR4GcGFnZUlkAgEWAgIBD2QWAgIDD2QWBgIFDw8WAh4HVmlzaWJsZWdkZAIhDxAPFgIfA2hkZBYAZAItD2QWBGYPFgIfA2cWAgIPDw8WAh4HRGlzcGxheQsqKlN5c3RlbS5XZWIuVUkuV2ViQ29udHJvbHMuVmFsaWRhdG9yRGlzcGxheQJkZAICDw8WAh8DaGRkZNwZr5PrSzST6z06JEpuFPEtIM52" />
+
+<script type="text/javascript">
+<!--
+var theForm = document.forms['_ctl1'];
+if (!theForm) {
+    theForm = document._ctl1;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+// -->
+</script>
+
+
+<script src="/WebResource.axd?d=-7eGazC6xaqwq5gjNSYpnA2&amp;t=633543537208035912" type="text/javascript"></script>
+
+<script src="/WebResource.axd?d=4GvN67mt9o73JHfCElyg9EOELfW0yO3xEJ5dN1J3FAs1&amp;t=633543537208035912" type="text/javascript"></script>
+<script src="/WebResource.axd?d=nE6DkonP89Ky17CQykoHsN9JoUe-KsWD5_JP8qD8imJz39sD81yyrthtqZ969i0lwsCSvz5P44tWjGJ7LLtYMXS07kGNKVqVl2hiJ7dEYSI1&amp;t=633240867407989527" type="text/javascript"></script>
+<script type="text/javascript">
+<!--
+function WebForm_OnSubmit() {
+if (typeof(ValidatorOnSubmit) == "function" && ValidatorOnSubmit() == false) return false;
+return true;
+}
+// -->
+</script>
+
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWBgLkn7GSDQKuoszeCQKp1YD1BAKWl80jAvvUhvsKAoihtboBQLzfmnAysEKeezuMVDm8d1MWayQ=" />
+<span id="errorMessage" class="error"></span>
+
+		<table class="articleViewer">
+			<tr>
+				<td class="articleFooter" colSpan="2">
+
+					<a id='top'></a>
+					<a id="printView" rel="nofollow" href="/articleViewer.aspx?aId=135&amp;pId=-1" target="_blank"><img src="/images/icons_11x8/icon-print.gif" height="8" width="11" alt="Print This Article" />&nbsp;Print</a>&nbsp;
+					<a id="addFavorite" onclick="javascript:AddToFavorites('ViewState: All You Wanted to Know','http://aspalliance.com/135');" href="#" style="cursor:hand;"><img src="/images/icons_11x8/icon-favorite.gif" height="8" width="11" alt="Add To Favorites" />&nbsp;Add To Favorites</a>&nbsp;
+	                <script language='javascript'>
+document.write("<a href='http://del.icio.us/post?url="+encodeURIComponent(document.location.href)+ "&title="+encodeURIComponent(document.title)+"'><img src='/images/delicious_10x10.gif' height='10' width='10' alt='Add To Del.icio.us' />Add to Del.icio.us</a>");
+</script>
+<span id="Delicious1"></span>&nbsp;				
+					<a id="emailFriend" onclick="javascript:OpenEmail('ViewState: All You Wanted to Know');" href="#" style="cursor:hand;"><img src="/images/icons_11x8/icon-envelope.gif" height="8" width="11" alt="Email This Article To A Friend" />&nbsp;Email To Friend</a>&nbsp;
+					<a id="rate" href="/RateArticle.aspx?aId=135" target="_blank"><img src="/images/icons_11x8/icon-rate.gif" height="8" width="11" alt="Rate This Article" />&nbsp;Rate This Article</a>&nbsp;
+
+					&nbsp;
+				</td>
+			</tr>
+			<tr>
+				<td class="articletitle" colSpan="2">
+					<span id="title">ViewState: All You Wanted to Know</span><br />
+				</td>
+			</tr>
+
+		</table>
+	    <table id="pageInformation" width="100%">
+	<tr>
+		<td class="pageInformation">
+	        <span id="pageInfo">page</span>
+	        <span id="pageNumber">1 of </span>
+	        <span id="pageCount">1</span></td>
+
+	</tr>
+</table>
+
+		<table class="articleViewer" style="top: -21px;">
+			
+				<tr>
+					<td class="abstract" colspan="2">
+					    <span class="subtitle">Published:</span>
+						<span id="DatePublishedLabel">17 Oct 2003</span><br />
+						
+					</td>										
+			    </tr>
+
+			    
+			    <!-- is premium -->
+			    
+			    
+			    <tr>
+					<td class="abstract">
+						    <span class="subtitle">Abstract</span>
+						<br />
+						<span id="abstractLabel">This article looks at what ViewState is NOT and what it is, as well as exploring the internal format of ViewState and how you can parse it yourself.</span></td>
+					<td class="photo">
+						<a id="authorLink" href="/author.aspx?uId=1746"><img id="photo" src="/images/photos/dc1f1635-9ed5-4e12-b3db-707d51051144_80_80.jpg" border="0" style="border-style:None;" /></a></td>
+
+				</tr>
+			
+			<tr>
+				<td colSpan="2">
+					by <span id="author" class="author"><a href='http://aspalliance.com/author.aspx?uId=1746'>Paul Wilson</a></span><br />
+					<a id="authorFeedbackHyperLink" href="/feedback.aspx?uId=125202">Feedback</a><br />
+					</td>
+			</tr>
+
+			<tr>
+				<td class="ratingBar" colspan="2">
+					<span class="rating">Average Rating:</span>&nbsp;This article has not yet been rated.<br />
+					<SPAN style="FONT-WEIGHT: bold; COLOR: #aa0000;">Views (Total / Last 10 Days):</SPAN>
+					<span id="ArticleTotalViewsLabel">101165</span>/
+					<span id="ArticleViewsLabel">318</span>
+				</td>
+
+			</tr>
+			<tr>
+				<td colSpan="2">
+				<div style="float:left">
+					
+				</div>
+				<div id="RectangleAd">
+	
+				<div style="float:right">
+				<script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=7;
+lqm_zone=1;
+</script>
+
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span id="Rectangle1"></span>
+				</div>
+</div>
+				</td>
+			</tr>
+			<tr>
+				<td colSpan="2" align="center">
+					<hr class="line">
+				</td>
+
+			</tr>
+			<tr><td colspan="2" class="subtitle"><span id="intellitTxt"><A class='pageTitle' id='#Page1'>ViewState: All You Wanted to Know</A></span></td></tr><tr><td colspan="2" class="content"><div class="KonaBody"><div align="center">
+<h1>ViewState: All You Wanted to Know</h1><a href="mailto:Paul@WilsonDotNet.com">Paul Wilson</a> <br /><a href="http://www.wilsondotnet.com/" target="_blank">www.WilsonDotNet.com </a><br /><a href="http://authors.aspalliance.com/PaulWilson/" target="_blank">www.ASPAlliance.com/PaulWilson </a>
+<p><a href="/articleViewer.aspx?aId=134">Previous Article</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/articleViewer.aspx?aId=134">Page Events and PostBack</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="http://authors.aspalliance.com/PaulWilson/Articles/?id=8">Next Article</a> </p></div>
+
+<h2>What ViewState is Not</h2>First, lets consider what ViewState is NOT, since there are several common misconceptions. ViewState does not help restore posted values to form controls, although this is said at times. The easiest way to see this is to disable a control’s ViewState and watch its value be restored. This is done automatically for us by matching the posted form variable name with the control, although this only works for controls that are created by the time the Load event is completed. So while ASP.NET does automate the restoring of form values, this is not part of ViewState. 
+<p>ViewState also does not auto-recreate any controls that were dynamically created in the code. This is actually something that many of us have discovered the hard way, since it doesn’t work. Any controls that you dynamically create in your code must therefore be recreated in the code. This can be a little difficult at times to work around, especially for controls created in events, but it is doable if you keep track of what’s been previously done and recreate it on each Load. ViewState can, however, be used to track this information, but we must manually code for it. 
+<p>Finally, ViewState is not intended for user or session data, nor for transferring across pages. ViewState is only designed for state data related to the current page and its various controls. It does not get sent to a new page in any case, not through links, redirects, or server transfers. There may be things that you want to access on multiple pages, due to redirects or transfers, but the solutions involve using either cookies, session, or the request context, not ViewState. We will also see that ViewState is neither secure, nor always the best use of server resources. 
+<h2>So What is ViewState</h2>ViewState is used to track and restore the state values of controls that would otherwise be lost, either because those values do not post with the form or because they are not in the page html. This means that a control totally defined in your page html, with no changes made in the code, will have no ViewState at all, as is often the case when using drag-n-drop with static content. Instead, ViewState only holds the values of properties that are dynamically changed somehow, usually in code, data-binding, or user interactions, so that they can be restored on each request. 
+<p>So, ViewState holds properties you change in code, any data that you bind to a control in code, and any changes that occur as a result of user interactions that were triggered with a PostBack. An example of a user interaction is a user selecting a date or moving a month in the calendar, which triggers a PostBack that changes properties of the calendar to match the user’s request. The new date selected or month being viewed must be persisted in the calendar’s ViewState since these are properties that will need to be restored but which will not be posted next time. 
+<p>ViewState also provides a StateBag, which is a special collection or dictionary, for each page that you can use to store any object or value, associated with a key, to retain across PostBacks. This is useful for your own custom items that are relevant to only that specific page instance, since these values will automatically post with that page, but not transfer to any other pages. One very good use of custom ViewState is to keep track of any dynamically created controls, which you can then manually recreate on each post based on your tracking data in ViewState. 
+<h2>And What is the Format</h2>ViewState is by default serialized and passed across page PostBacks as a hidden form field, __VIEWSTATE, that is Base64 encoded so that it is not easily readable, but not encrypted. ViewState is by default tamper-proof, however, since a hash is applied based on machine key, although this is disabled by setting the enableViewStateMac property to false (<a href="#Listing1">see Listing 1</a>). ViewState can be optionally encrypted, by setting up machineKey validation (<a href="#Listing2">see Listing 2</a>), but this must be done at the machine level and it uses more resources so its not recommended. 
+<p>ViewState is saved before rendering in the Page.SavePageStateToPersistenceMedium method and it is restored on PostBacks in the Page.LoadPageStateFromPersistenceMedium method. Both of these methods can be easily overridden to save ViewState to Session (<a href="#Listing3">see Listing 3</a>), which is useful for low-bandwidth cases, like Mobile devices which use Session by default. Storing the ViewState in other data stores, like a database or even advanced Session modes, requires serialization and deserialization using the special LosFormatter class (<a href="#Listing4">see Listing 4</a>). 
+
+<p>Finally, lets take a look at the internal format of the ViewState object for completeness sake. Each control’s ViewState is stored in a Triplet (System.Web.UI.Triplet) with the First object being a Pair (System.Web.UI.Pair), or Array or Pairs, of ArrayLists of related name-values. The Second object of the Triplet is an ArrayList of that control’s child indices in control tree, and the Third object is an ArrayList of the similar associated Triplets of those child controls. Its all rather hard to describe, so look at the <a href="#Listing5">example</a> and try it for yourself (<a href="#Listing6">see Listings 5/6</a>). <a name="Listing1"></a>
+<div align="center">
+<h5>Listing 1: ViewState Machine Hash Disabled</h5></div><pre style="FONT-SIZE: 10pt"><b>machine.config or web.config</b>: &lt;pages enableViewStateMac='false' /&gt;
+<b>page level directive</b>:         &lt;%@Page enableViewStateMac='false' %&gt;
+
+<b>page level script code</b>:       Page.EnableViewStateMac = false;
+</pre><a name="Listing2"></a>
+<div align="center">
+<h5>Listing 2: ViewState Encryption is Enabled</h5></div><pre style="FONT-SIZE: 10pt"><b>machine.config</b>: &lt;machineKey validation='3DES' validationKey='*' /&gt;
+<i>where the validationKey must be the same across a web-farm setup
+also requires the enableViewStateMac property setting to be true</i>
+</pre><a name="Listing3"></a>
+<div align="center">
+<h5>Listing 3: ViewState Saved in Session State</h5></div><pre style="FONT-SIZE: 10pt"><font color="blue">protected override object</font> LoadPageStateFromPersistenceMedium() {
+ <font color="blue">return</font> Session["ViewState"];
+}
+
+<font color="blue">protected override void</font> SavePageStateToPersistenceMedium(<font color="blue">object</font> viewState) {
+ Session["ViewState"] = viewState; 
+ <font color="green">// Bug requires Hidden Form Field __VIEWSTATE</font>
+ RegisterHiddenField("__VIEWSTATE", "");
+}
+</pre><a name="Listing4"></a>
+<div align="center">
+<h5>Listing 4: ViewState Saved in Custom Store</h5></div><pre style="FONT-SIZE: 10pt"><font color="blue">protected override object</font> LoadPageStateFromPersistenceMedium() {
+ LosFormatter format = <font color="blue">new</font> LosFormatter();
+ <font color="blue">return</font> format.Deserialize(YourDataStore["ViewState"]);
+}
+
+<font color="blue">protected override void</font> SavePageStateToPersistenceMedium(<font color="blue">object</font> viewState) {
+ LosFormatter format = <font color="blue">new</font> LosFormatter();
+ StringWriter writer = <font color="blue">new</font> StringWriter();
+ format.Serialize(writer, viewState);
+ YourDataStore["ViewState"] = writer.ToString();
+}
+</pre><a name="Listing5"></a>
+<div align="center">
+<h5>Listing 5: ViewState Decode/Parse Example</h5></div><pre style="FONT-SIZE: 10pt"><b>Encoded ViewState</b>:
+dDwxMjM0NTY3ODkwO3Q8cDxsPHBycEE7cHJwQjtwcnBDOz47bDx2YWxBO3ZhbEI7dmFsQzs+PjtsPGk8
+MD47aTwyPjtpPDM+O2k8NT47PjtsPHQ8cDxsPHBycEE7cHJwQjs+O2w8dmFsQTt2YWxCOz4+Ozs+O3Q8
+cDxsPHBycEE7cHJwQjs+O2w8dmFsQTt2YWxCOz4+Ozs+O3Q8cDxsPHBycEE7cHJwQjs+O2w8dmFsQTt2
+YWxCOz4+Ozs+O3Q8cDxsPHBycEE7cHJwQjs+O2w8dmFsQTt2YWxCOz4+Ozs+Oz4+Oz4=
+
+<b>Decoded ViewState</b>:
+t&lt;1234567890;t&lt;p&lt;l&lt;prpA;prpB;prpC;&gt;;l&lt;valA;valB;valC;&gt;&gt;;
+l&lt;i&lt;0&gt;;i&lt;2&gt;;i&lt;3&gt;;i&lt;5&gt;;&gt;;l&lt;
+
+t&lt;p&lt;l&lt;prpA;prpB;&gt;;l&lt;valA;valB;&gt;&gt;;;&gt;;
+t&lt;p&lt;l&lt;prpA;prpB;&gt;;l&lt;valA;valB;&gt;&gt;;;&gt;;
+t&lt;p&lt;l&lt;prpA;prpB;&gt;;l&lt;valA;valB;&gt;&gt;;;&gt;;
+t&lt;p&lt;l&lt;prpA;prpB;&gt;;l&lt;valA;valB;&gt;&gt;;;&gt;;&gt;&gt;;&gt;
+
+<b>Parsed ViewState</b>:
+t&lt;1234567890;             <i>Page-Level Triplet is Special Case</i>
+  t&lt;p&lt;l&lt;prpA;prpB;prpC;&gt;; <i>Triplet-First:Pair-First:ArrayList</i>
+      l&lt;valA;valB;valC;&gt;                <i>Pair-Second:ArrayList</i>
+
+     &gt;;
+    l&lt;i&lt;0&gt;;               <i>Triplet-Second:ArrayList:Indices</i>
+      i&lt;2&gt;;                                        <i>of the</i>
+      i&lt;3&gt;;                                        <i>Children</i>
+
+      i&lt;5&gt;;                                        <i>Controls</i>
+     &gt;;
+    l&lt;t&lt;p&lt;l&lt;prpA;prpB;&gt;;  <i>Triplet-Third:ArrayList:Triplets</i>
+          l&lt;valA;valB;&gt;                           <i>of the</i>
+
+         &gt;;                                       <i>Children</i>
+       ;                                          <i>Controls</i>
+       &gt;;
+      t&lt;p&lt;l&lt;prpA;prpB;&gt;;  <i>Each Sub-Triplet follows same Pattern</i>
+          l&lt;valA;valB;&gt;   
+         &gt;;
+       ;                  <i>More Levels Possible if sub-Children</i>
+
+       &gt;;
+      t&lt;p&lt;l&lt;prpA;prpB;&gt;;  <i>Each Sub-Triplet follows same Pattern</i>
+          l&lt;valA;valB;&gt;
+         &gt;;
+       ;                  <i>More Levels Possible if sub-Children</i>
+       &gt;;
+      t&lt;p&lt;l&lt;prpA;prpB;&gt;;  <i>Each Sub-Triplet follows same Pattern</i>
+
+          l&lt;valA;valB;&gt;
+         &gt;;
+       ;                  <i>More Levels Possible if sub-Children</i>
+       &gt;;
+     &gt;
+   &gt;;                     <i>Closing of Special Page-Level Triplet</i>
+ &gt;
+
+</pre><a name="Listing6"></a>
+<div align="center">
+<h5>Listing 6: ViewState Decode/Parse Code</h5></div><pre style="FONT-SIZE: 10pt"><font color="blue">protected override void</font> SavePageStateToPersistenceMedium(<font color="blue">object</font> viewState) {
+ <font color="green">// Call Base Method to Not Change Normal Process</font>
+ <font color="blue">base</font>.SavePageStateToPersistenceMedium(viewState);
+ <font color="green">// Retrieve ViewState and Write Out to Page</font>
+ LosFormatter format = <font color="blue">new</font> LosFormatter();
+ StringWriter writer = <font color="blue">new</font> StringWriter();
+ format.Serialize(writer, viewState);
+ <font color="blue">string</font> vsRaw = writer.ToString();
+ Response.Write("ViewState Raw: " + Server.HtmlEncode(vsRaw));
+ <font color="green">// Decode ViewState and Write Out to Page</font>
+
+ <font color="blue">byte</font>[] buffer = Convert.FromBase64String(vsRaw);
+ <font color="blue">string</font> vsText = Encoding.ASCII.GetString(buffer);
+ Response.Write("ViewState Text: " + Server.HtmlEncode(vsText));
+ <font color="green">// Parse ViewState -- Turn On Page Tracing</font>
+ ParseViewState(viewState, 0);
+}
+<font color="blue">private void</font> ParseViewState(<font color="blue">object</font> vs, <font color="blue">int</font> level) {
+ <font color="blue">if</font> (vs == <font color="blue">null</font>) {
+  Trace.Warn(level.ToString(), Spaces(level) + "null");
+ }
+ <font color="blue">else if</font> (vs.GetType() == <font color="blue">typeof</font>(System.Web.UI.Triplet)) {
+  Trace.Warn(level.ToString(), Spaces(level) + "Triplet");
+  ParseViewState((Triplet) vs, level);
+ }
+ <font color="blue">else if</font> (vs.GetType() == <font color="blue">typeof</font>(System.Web.UI.Pair)) {
+  Trace.Warn(level.ToString(), Spaces(level) + "Pair");
+  ParseViewState((Pair) vs, level);
+ }
+ <font color="blue">else if</font> (vs.GetType() == <font color="blue">typeof</font>(System.Collections.ArrayList)) {
+  Trace.Warn(level.ToString(), Spaces(level) + "ArrayList");
+  ParseViewState((IEnumerable) vs, level);
+ }
+ <font color="blue">else if</font> (vs.GetType().IsArray) {
+  Trace.Warn(level.ToString(), Spaces(level) + "Array");
+  ParseViewState((IEnumerable) vs, level);
+ }
+ <font color="blue">else if</font> (vs.GetType() == <font color="blue">typeof</font>(System.String)) {
+  Trace.Warn(level.ToString(), Spaces(level) + "'" + vs.ToString() + "'");
+ }
+ <font color="blue">else if</font> (vs.GetType().IsPrimitive) {
+  Trace.Warn(level.ToString(), Spaces(level) + vs.ToString());
+ }
+ <font color="blue">else</font> {
+  Trace.Warn(level.ToString(), Spaces(level) + vs.GetType().ToString());
+ }
+}
+
+<font color="blue">private void</font> ParseViewState(Triplet vs, <font color="blue">int</font> level) {
+ ParseViewState(vs.First, level + 1);
+ ParseViewState(vs.Second, level + 1);
+ ParseViewState(vs.Third, level + 1);
+}
+<font color="blue">private void</font> ParseViewState(Pair vs, <font color="blue">int</font> level) {
+ ParseViewState(vs.First, level + 1);
+ ParseViewState(vs.Second, level + 1);
+}
+<font color="blue">private void</font> ParseViewState(IEnumerable vs, <font color="blue">int</font> level) {
+ <font color="blue">foreach</font> (<font color="blue">object</font> item <font color="blue">in</font> vs) {
+  ParseViewState(item, level + 1);
+ }
+}
+
+<font color="blue">private string</font> Spaces(<font color="blue">int</font> count) {
+ <font color="blue">string</font> spaces = "";
+ <font color="blue">for</font> (<font color="blue">int</font> index = 0; index &lt; count; index++) {
+  spaces += "   ";
+ }
+ <font color="blue">return</font> spaces;
+}
+
+</pre>
+<h4>Author Bio</h4>Paul Wilson is a software architect in Atlanta, currently with PRG-Schultz. He specializes in Microsoft technologies, including .NET, C#, ASP, SQL, COM+, and VB. His <a href="http://www.wilsondotnet.com/WebForm/" target="_blank">WilsonWebForm</a> Control allows Multiple Forms and Non-PostBack Forms in ASP.NET. He is a Microsoft MVP in ASP.NET and is also recognized as an <a href="http://www.aspinsiders.com/" target="_blank">ASPInsider</a>. He is a moderator on Microsoft's <a href="http://www.asp.net/Forums" target="_blank">ASP.NET Forums</a>, as well as one of the top posters. He is holds the MCSD, MCAD, MCDBA, and MCSE certifications. Please visit his website, <a href="http://www.wilsondotnet.com/" target="_blank">www.WilsonDotNet.com</a>, or email him at <a href="mailto:Paul@WilsonDotNet.com">Paul@WilsonDotNet.com</a>.</div></td></tr>
+			<tr>
+
+				<td colSpan="2">
+					<hr class="line">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2">
+				<table cellpadding="0" cellspacing="0" border="0" width="100%"><tr>
+                <td width="15%"></td>
+				<td width="70%"><center></center></td>
+
+				<td width="15%" align="right">
+					</td>
+				</tr>
+				</table>
+				</td>
+			</tr>
+			<tr>
+				<td colSpan="2">
+					
+	<P></P>
+
+	<P><STRONG>Article Feedback</STRONG><BR>
+	</P>
+	<div id="articleComments_ValidationSummary1" style="color:Red;display:none;">
+
+</div>
+	<DIV style="BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; BORDER-LEFT: black 1px solid; WIDTH: 80%; BORDER-BOTTOM: black 1px solid">
+		<TABLE class="pageList" cellSpacing="1" cellPadding="2" width="100%" bgColor="#eeeeee"
+			border="0">
+			<TR>
+				<TH align="right" width="80">
+
+					Title:</TH>
+				<TD>
+					<input name="articleComments:txtTitle" type="text" maxlength="150" size="45" id="articleComments_txtTitle" /><span controltovalidate="articleComments_txtTitle" errormessage="You must enter a title for your comment." validationGroup="Enter" id="articleComments_RequiredFieldValidator1" evaluationfunction="RequiredFieldValidatorEvaluateIsValid" initialvalue="" style="color:Red;font-weight:bold;visibility:hidden;">*</span></TD>
+			</TR>
+			<TR>
+				<TH align="right" width="80">
+					Name:</TH>
+
+				<TD>
+					<input name="articleComments:txtName" type="text" maxlength="120" size="45" id="articleComments_txtName" /><span controltovalidate="articleComments_txtName" errormessage="You must enter your name." validationGroup="Enter" id="articleComments_RequiredFieldValidator2" evaluationfunction="RequiredFieldValidatorEvaluateIsValid" initialvalue="" style="color:Red;font-weight:bold;visibility:hidden;">*</span></TD>
+			</TR>
+			<TR>
+				<TH align="right" width="80">
+					Url:</TH>
+				<TD>
+					<input name="articleComments:txtUrl" type="text" maxlength="150" size="45" id="articleComments_txtUrl" /><EM>( 
+						Optional )</EM></TD>
+
+			</TR>
+			<TR>
+				<TH align="left" colSpan="2">
+					Comment:
+					<span controltovalidate="articleComments_txtComment" errormessage="You must enter a comment." validationGroup="Enter" id="articleComments_RequiredFieldValidator3" evaluationfunction="RequiredFieldValidatorEvaluateIsValid" initialvalue="" style="color:Red;font-weight:bold;visibility:hidden;">*</span></TH></TR>
+			<TR>
+				<TH align="left" colSpan="2">
+					<textarea name="articleComments:txtComment" rows="7" cols="60" id="articleComments_txtComment"></textarea></TH></TR>
+
+			<TR vAlign="bottom" height="30">
+				<TH align="right" colSpan="2">
+				    <span display="Dynamic" validationGroup="Enter" id="articleComments_InvisibleCaptcha1" style="color:Red;display:none;"></span><span id="articleComments_InvisibleCaptcha1_subtext_captcha">Please add 5 and 4 and type the answer here: <input type="text" name="articleComments_InvisibleCaptcha1_visibleanswer" value="" /></span><input type="submit" name="articleComments:btnEnterComment2" value="Enter Comment" onclick="javascript:WebForm_DoPostBackWithOptions(new WebForm_PostBackOptions(&quot;articleComments:btnEnterComment2&quot;, &quot;&quot;, true, &quot;Enter&quot;, &quot;&quot;, false, false))" language="javascript" id="articleComments_btnEnterComment2" /></TH></TR>
+		</TABLE>
+	</DIV>
+
+<hr class="line">
+<P><STRONG>User Comments</STRONG><br>
+</P>
+<P align="center">
+
+	
+	
+			<table cellpadding="2" bgcolor="Black" cellspacing="1" border="0" width="80%">
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Developer
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+					Khyati Shah
+					<br />
+
+					<b>Date: </b>
+					5/21/2008 2:06:22 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl1_commentLabel">Thanks, <br />you have cleared my fundamentals. I was facing a situation where a build was working locally but was not working on a cluster. The exception was caused due to mismatching validateKeys for which i added the key in the machineKey.config. But after reading this article i think it may not be the best solution to do that, since it has its over head.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Developer
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Sam Jackson
+					<br />
+					<b>Date: </b>
+					5/13/2008 1:14:26 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl2_commentLabel">How is the object viewState being populated in the SavePageStateToPersistenceMedium method? What sets the object? Do you have a complete example of this? There seems to be a step missing?</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					viewstate vs session
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					DaveM
+					<br />
+					<b>Date: </b>
+					1/18/2008 5:52:16 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl3_commentLabel">Nice article!  I am trying to find the correct way to save state for an ajax tabpage which includes a usercontrol and a button to add a second tab with a new copy of the usercontrol.  Upon postback the changes are lost in the first tab's usercontrol.  I have played around with viewstate but have not had success in this yet.  You mention that viewstate may not be the correct way to save dynamically created controls and that you might prefer session variables.  Do you have any suggestions or code examples?  I am in a asp.net 2.0 environment. dmohr@asainc.net  Thx  Dave</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					A common unanswered Questions
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Deepak
+					<br />
+					<b>Date: </b>
+					9/23/2007 9:14:27 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl4_commentLabel">A common question I come across is &quot;Can I pass viewstate between pages?&quot; and the answer on all pages is NO. <br />BUT,<br />Say I have Page1 having a button. On click of button I can get the value of __viewstate hidden field, append it in querystring and pas it on to another page. There I can decode it and use the information. OR ELSE I can do a postback to another page, get the Viewstate data using request.form and again decode it, then why do people say viewstate can not be transfered between pages?????</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Good Article
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Ravi
+					<br />
+					<b>Date: </b>
+					1/29/2007 5:55:09 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl5_commentLabel">This is good for viewState but better to give a one example</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Great Article
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					AVS Prasad
+					<br />
+					<b>Date: </b>
+					12/13/2006 1:59:05 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl6_commentLabel">Hi,<br /><br />This is really a great article that has helped me in clearing some of the assumptions that I had about the viewstate. Thanks  a lot for such a nice article.<br /><br />Thanks &amp; Regards,<br />Prasad.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					sessions value has to be dynamically uploded
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					krishna prasad
+					<br />
+					<b>Date: </b>
+					6/2/2006 8:51:58 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl7_commentLabel">how to present the session vlaue in other page and has to be changed tat value dynamically</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					k
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					k
+					<br />
+					<b>Date: </b>
+					5/23/2006 2:51:22 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl8_commentLabel">Excellent ,but should have been much mare lengthy</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Very good article | Not able to help me
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Kapil
+					<br />
+					<b>Date: </b>
+					12/13/2005 8:39:22 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl9_commentLabel">Hi,<br /><br />This is a very good article and gives lot of information about view state management. But i am facing some issue view states. Somewhat related/unrelated. It would be goo if someome can provide some help. The problem is: <br /><br />I have 3 user controls sitting on an ASPX page being loaded in Placeholder controls. We are loading all 3, but rendering only one based on certain conditions. The problem that we are facing is that when we post back the same use control, the server side controls maintain their view state, which messes up the data.<br /><br />Any clue?<br /><br />Thanks,<br />Kapil</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					anything
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					someone
+					<br />
+					<b>Date: </b>
+					11/22/2005 12:30:40 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl10_commentLabel">This is the best example of a user making misuse of the feedback facility !</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Post to another page
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					mozzy
+					<br />
+					<b>Date: </b>
+					9/6/2005 9:38:08 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl11_commentLabel">I have found a way how to Post a form to another page rather doing a post back. however i can't send the Viewstate of the form to the second page since it would cause a validation error, hence i stored the viewstate hidden field value in another hidden field. now my question is:<br />is it possible to take the viewstate from the first form and merge it with the viewstate of the second form?<br />my idea was to decode both viewstates, discard the mac id of the first view state add it to the second viewstate encode the whole thing and then store it back as a usual viewstate.<br /><br />does anybody know how to do such a thing?</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Re:  Manipulate Viewstate using javascript
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Paul Wilson
+					<br />
+					<b>Date: </b>
+					8/3/2005 7:42:23 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl12_commentLabel">You cannot change ViewState on the client, nor should you.  The whole point is so the page can recreate what the last state on the server was -- and then compare that if necessary to what was posted back to determine changes.  If you are making some more sophisticated changes than you'll need to make a design to get the information relevant back to the server.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Manipulate Viewstate using javascript
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					K. Hari Das
+					<br />
+					<b>Date: </b>
+					8/3/2005 2:04:44 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl13_commentLabel">Hi Paul,<br /><br />I am using Infragistic webgrid controls in my page. There are two of them between which the user can transfer records to and fro. But the problem is when I am saving this page, I am not able to get the client side changes on the server side. <br /><br />I think the viewstate is not getting updated on the client side. <br /><br />Do you have any idea on how to go about this. Is there a way by which I can refresh the viewstate on the client side to reflect client side changes or can I manipulate viewstate using javascript.<br /><br />Thanks &amp; Regards,<br /><br />K. Hari Das, Technology Architect<br />(Cell No - 91-09823150049)<br />Info-Spectrum India Pvt. Ltd.<br />H.B.Hall, Sonegaon,<br />Nagpur - 440025<br />INDIA</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Good
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Saleena
+					<br />
+					<b>Date: </b>
+					6/14/2005 2:40:47 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl14_commentLabel">Really a good one...for the beginners</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					System Analyst/Developer
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Greg Jackson
+					<br />
+					<b>Date: </b>
+					6/11/2005 10:53:17 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl15_commentLabel">This was a good article. I ran into an issue where session variables were coded in the asp.net pages. The application was tested on a single server then deployed to a load balanced environment. I started receiving data state issues and immediately assumed that view state would resolve my issue by replacing session with viewstate and server.transfer. To my dismay the solution combo I tried did not provide the stateless environment I was trying to build. Even though I have abandoned that design avenue I am still in search of another way to provide a stateless environment while at the same time not performing the overhead of recreating data I already possess in the page and that is needed between pages. This article provided the evidence that I needed to begin investigating an alternative solution.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Re: Very Good Article
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					antibozo
+					<br />
+					<b>Date: </b>
+					6/2/2005 12:19:50 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl16_commentLabel">No, the t&lt;123456890; value appears to be an identifier for the .aspx page itself--perhaps a file identifier (a la inode number) salted with the modification time. This may be a measure to limit one's ability to take a __VIEWSTATE from one page and hand it to another page which uses the same machine id, or even to replay a __VIEWSTATE from one version of a page into a later version where the controls have been reordered.<br /><br />The machine id is a secret, so it can't be embedded in __VIEWSTATE.<br /><br />The message authentication code (digest of __VIEWSTATE + secret) is appended to __VIEWSTATE before base64 encoding. It is 20 bytes long, which is evidence that a SHA1 digest may be used.<br /><br />The example __VIEWSTATE Paul used does not have a message authentication code. If it did, you would see a bunch of binary data (20 bytes as noted above) tacked on after the last &gt;.<br /><br />It would be nice if someone would actually thoroughly document the format of this beast. Using asp.net to decode it is not particularly informative. What, for example, does @0 mean? What happens when a control contains a &lt; or ; character?</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					good
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					jagaidh
+					<br />
+					<b>Date: </b>
+					5/16/2005 9:12:23 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl17_commentLabel">good news for viewstate. need one examples.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Viewstate Parser
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Alan
+					<br />
+					<b>Date: </b>
+					4/25/2005 9:38:44 AM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl18_commentLabel">Hi<br /><br />Good article and it’s been a start for me building a parser like yours but I wanted it to show name value pairs.<br /><br />What a pain in the a$$ it is,<br /><br />Often Triplets contain arrays that in turn have arrays and often the arrays only hold one item whilst other arrays repeat the same data twice.<br /><br />On a simple page with a grid control you end up drilling down about 9 levels and then the data you can see means little or nothing.<br /><br />Will send you a copy if I ever get it done<br /><br />ZZZAlan@AlansHome.co.UK<br /><br />Regards <br /><br />Alan Britain</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Great
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Troy
+					<br />
+					<b>Date: </b>
+					3/30/2005 1:35:32 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl19_commentLabel">Most useful article describing view state.</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#dddddd">
+				<td>
+					<b>Title: </b>
+					Re:  Very Good Article
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Paul Wilson
+					<br />
+					<b>Date: </b>
+					12/21/2004 1:02:58 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+<span id="articleComments_rptArticleComments__ctl20_commentLabel">Thanks Adam.<br /><br />Yes, as for as I can deduce, that first triple is the hash for that page that is used on postback to make sure nothing has been tampered with, but since none of this stuff is really documented its mostly an educated guess.<br /><br />Thanks, Paul Wilson</span></span>
+
+				</td>
+			</tr>
+		
+			<tr bgcolor="#eeeeee">
+				<td>
+					<b>Title: </b>
+					Very Good Article
+					&nbsp;&nbsp; 
+					<br />
+					<b>Name: </b>
+
+					Adam
+					<br />
+					<b>Date: </b>
+					12/21/2004 12:40:08 PM
+					<br />
+					<b>Comment: </b>
+					<br />
+					<span style="font-family: Verdana; font-size: 9pt;">
+	<span id="articleComments_rptArticleComments__ctl21_commentLabel">Great article thats really useful (and clear).<br /><br />One question tho regarding the page level triplet within the decoded or parsed viewstate - in this case given as t&lt;1234567890; - Is this the machine key thats used to hash viewstate data for form postbacks? If not are you aware what this data is (used for)?</span></span>
+
+				</td>
+			</tr>
+		
+			</table>
+		</P>
+</td>
+			</tr>
+			<tr>
+				<td colSpan="2">
+					<div id="articleProductSpotlight" class="articleProductSpotlight"><b>Product Spotlight<br />
+
+						</b><img src="/images/gear_16x16.gif" alt="Product Spotlight" align="top" height="16" width="16" />&nbsp;<script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=2;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span id="ps1"></span>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+				  <center>
+
+					<script type="text/javascript"><!--
+google_ad_client = "pub-4053580011448835";
+			google_ad_width = 300;
+			google_ad_height = 250;
+			google_ad_format = "300x250_as";
+			google_ad_type = "text_image";
+			google_ad_channel ="2776730118";
+			google_color_border = "CC0000";
+			google_color_bg = "FFFFFF";
+			google_color_link = "660000";
+			google_color_url = "008000";
+			google_color_text = "000000";
+//--></script>
+<script type="text/javascript"
+ src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script><span id="Google1"></span></center>
+				</td>
+			</tr>
+		</table>
+	
+
+<script type="text/javascript">
+<!--
+var Page_ValidationSummaries =  new Array(document.getElementById("articleComments_ValidationSummary1"));
+var Page_Validators =  new Array(document.getElementById("articleComments_RequiredFieldValidator1"), document.getElementById("articleComments_RequiredFieldValidator2"), document.getElementById("articleComments_RequiredFieldValidator3"), document.getElementById("articleComments_InvisibleCaptcha1"));
+// -->
+</script>
+
+
+<script type="text/javascript">
+<!--
+
+var Page_ValidationActive = false;
+if (typeof(ValidatorOnLoad) == "function") {
+    ValidatorOnLoad();
+}
+
+function ValidatorOnSubmit() {
+    if (Page_ValidationActive) {
+        return ValidatorCommonOnSubmit();
+    }
+    else {
+        return true;
+    }
+}
+        // -->
+
+</script>
+<script type="text/javascript">
+subtext_invisible_captcha_hideFromJavascriptEnabledBrowsers('articleComments_InvisibleCaptcha1_subtext_captcha');
+</script><script type="text/javascript">
+subtext_invisible_captcha_setAnswer(5, 4, 'articleComments_InvisibleCaptcha1_answer');
+</script></form>
+<!-- ContentEnd --></td><td class="rightColumn"><fieldset><legend><a href="http://lakequincy.com/advertisers/publisherinfo/aspalliance.aspx">Learn More</a></legend>
+		<table class="TL">
+			<thead>
+			<tr>
+				<td>.NET Tools</td>
+			</tr>
+
+			</thead>
+			
+					<tr>
+						<td>
+							<a href='http://www.dotnetcart.com/' rel='nofollow'>
+								asp.net shopping cart
+							</a>
+						</td>
+					</tr>
+				
+					<tr>
+
+						<td>
+							<a href='http://www.dotnetcharting.com/' rel='nofollow'>
+								asp.net chart control
+							</a>
+						</td>
+					</tr>
+				
+		</table>
+	
+</fieldset><br/><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><br/><img src="http://aspalliance.com/images/clear.gif" alt="" height="3" width="100" border="0" /><script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=4;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span></span><br/><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><div style="width:120px;font-size:0.9em;background-color:white;border:solid 1px black;text-align:left;padding-left:2px;padding-bottom:2px"><b><a href="http://index.aspalliance.com/" title="Find .NET Resources!">Latest Resources</a></b><br /><B>&raquo;&nbsp;</B><a href="http://index.aspalliance.com/HostingGallery/ASPWebHosting/Details/725_Cheap SQL 2008 Hosting & BEST Windows 2008 Hosting.aspx" rel="nofollow">Cheap SQL 2008 Hosting & BEST Windows 2008 Hosting</a><br /><B>&raquo;&nbsp;</B><a href="http://index.aspalliance.com/ControlGallery/FormProcessing/Details/723_YUI Asp.Net Button.aspx" rel="nofollow">YUI Asp.Net Button</a><br /><B>&raquo;&nbsp;</B><a href="http://index.aspalliance.com/ControlGallery/FormProcessing/Details/722_YUI Asp.Net ColorPicker.aspx" rel="nofollow">YUI Asp.Net ColorPicker</a><br /><B>&raquo;&nbsp;</B><a href="http://index.aspalliance.com/ControlGallery/FormProcessing/Details/721_YUI Asp.Net Slider.aspx" rel="nofollow">YUI Asp.Net Slider</a><br /><B>&raquo;&nbsp;</B><a href="http://index.aspalliance.com/ControlGallery/CalendarDateTime/Details/720_YUI Asp.Net Calendar.aspx" rel="nofollow">YUI Asp.Net Calendar</a></div>
+
+<br/><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=16;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span></span><br/><img src="http://aspalliance.com/images/clear.gif" alt="" height="5" width="100" border="0" /><br /><a href="http://lakequincy.com/" target="_blank"><script type="text/javascript">
+<!-- 
+lqm_channel=1;lqm_publisher=1;lqm_zone=1;lqm_format=9;lqm_placement=2545;lqm_creative=1856;
+//-->
+</script><script type="text/javascript" src="http://a.lakequincy.com/s.js"></script></td></tr></table></td></tr></table></td></tr><tr><td valign="top" colspan="2" align="center" width="100%" class="footerRow"><script type="text/javascript">
+lqm_channel=1;
+lqm_publisher=1;
+lqm_format=1;
+lqm_zone=1;
+</script>
+<script src="http://a.lakequincy.com/s.js" type="text/javascript"></script><span></span><div id="communitybar">Community Advice: <a href="http://aspadvice.com/">ASP</a> | 
+		<a href="http://sqladvice.com/">SQL</a> | 
+		<a href="http://xmladvice.com/">XML</a> | 
+		<a href="http://regexadvice.com/">Regular Expressions</a> | 
+		<a href="http://windowsadvice.com/">Windows</a>
+
+			</div>
+			<div id="blackangle"></div><span></span><br />
+<script type="text/javascript"> 
+<!-- 
+lqm_channel=1;
+lqm_publisher=1;
+lqm_zone=13;
+lqm_format=17;
+//-->
+</script>
+<script type="text/javascript" src="http://a.lakequincy.com/s.js"></script><br/><span class="footer">&copy;Copyright 1998-2009 ASPAlliance.com &nbsp;|&nbsp; Page Processed at 1/2/2009 2:08:45 AM&nbsp;&nbsp;<a href="http://aspalliance.com/rss.aspx"><img src="http://aspalliance.com/images/rss_button.gif" alt="AspAlliance Recent Articles RSS Feed" height="14" width="36" /></a><br /><a href="/about.aspx">About ASPAlliance</a> | <a href="http://aspalliance.com/groups/">Newsgroups</a> | <a href="http://lakequincy.com/advertisers/publisherinfo/aspalliance.aspx">Advertise</a> | <a href="/AuthorListing.aspx">Authors</a> | <a href="http://aspadvice.com/lists/">Email Lists</a> | <a href="/feedback.aspx">Feedback</a> | <a href="/link.aspx">Link To Us</a> | <a href="/privacy.aspx">Privacy</a> | <a href="http://www.google.com/custom?domains=aspalliance.com&q=&sitesearch=aspalliance.com&sa=Search&client=pub-4053580011448835&forid=1&channel=9561143596&ie=windows-1252&oe=windows-1252&safe=active&cof=GALT%3A%23008000%3BGL%3A1%3BDIV%3A%23336699%3BVLC%3A663399%3BAH%3Acenter%3BBGC%3AFFFFFF%3BLBGC%3ACC0000%3BALC%3A0000FF%3BLC%3A0000FF%3BT%3A000000%3BGFNT%3A0000FF%3BGIMP%3A0000FF%3BLH%3A80%3BLW%3A173%3BL%3Ahttp%3A%2F%2Faspalliance.com%2Fimages%2Faspalliance_logo_byline_white_173x80.gif%3BS%3Ahttp%3A%2F%2Faspalliance.com%2F%3BLP%3A1%3BFORID%3A1%3B&hl=en">Search</a></span><script type="text/javascript">var select = document.getElementById("homelink");if(select!=null){select.innerHTML = "Home";}</script><!-- Start Quantcast tag --><script type="text/javascript">_qoptions={qacct:"p-a3-n3YcLyLJ56"};</script><script type="text/javascript" src="http://edge.quantserve.com/quant.js"></script><noscript><img src="http://pixel.quantserve.com/pixel/p-a3-n3YcLyLJ56.gif" style="display: none;" border="0" height="1" width="1" alt="Quantcast"/></noscript><!-- End Quantcast tag --></td></tr></table></div><!-- start Vibrant Media IntelliTXT Tooltip style sheet -->
+
+<style type="text/css">
+.iTt{
+    FONT-FAMILY:       Verdana, Arial, Helvetica;
+    FONT-SIZE:         11px;
+    FONT-STYLE:        normal;
+    FONT-WEIGHT:       normal;
+    COLOR:             black;
+    BACKGROUND-COLOR:  lightyellow;
+    BORDER:            black 1px solid;
+    PADDING:           2px;
+}
+</style>
+<!-- end Vibrant Media IntelliTXT style sheet -->
+<!-- start Vibrant Media IntelliTXT script section --><script type="text/javascript" src="http://aspalliance.us.intellitxt.com/intellitxt/front.asp?ipid=1652&mk=6&kwpn=2&sn=breadCrumbCell,title"></script>
+<!-- end Vibrant Media IntelliTXT script section --><span></span><script src="http://www.google-analytics.com/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-470225-1";
+urchinTracker();
+</script><span></span></body></html>
